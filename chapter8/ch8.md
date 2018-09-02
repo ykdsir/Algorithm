@@ -13,3 +13,33 @@ $O(nlgn）$归并排序，堆排序，快速排序
 ## 计数排序
 假设n个输入的元素中的每一个都是在0到k区间的一个整数，k为某个整数。$k=O(n)$时，排序运行时间为$\Theta(n)$
 基本思想：对每一个输入$x$，确定小于$x$的个数。
+
+```python
+input: A[0~n] 数据范围0~k 中间变量C[0~k]
+output: B[0~n]
+
+def sort(self,array, maxsize):
+    C = [0] * maxsize
+    length = len(array)
+    result = [0] * length
+    for x in range(length):
+        C[array[x]] += 1
+    for x in range(1, maxsize):
+        C[x] = C[x] + C[x-1]
+    for idx in range(length-1,-1,-1):
+        result[C[array[idx]]-1] = array[idx]
+        C[array[idx]] -= 1
+    return result
+```
+
+## 基数排序
+卡片排序机上的算法。
+d位n进制——d列n行
+**按最低有效位进行排序**
+
+
+## 桶排序
+**桶排序**假设输入数据服从均匀分布，平均情况下时间代价为$O(n)$。桶排序假设输入是由一个随机过程产生，该过程将元素均匀、独立分布在[0，1)区间上。
+桶排序将[0,1）区间划分为n个大小相同的自区间，或称为**桶**。将n个数分别放在各个桶中。由于假设前提是输入数据均匀、独立分布，一般不会出现很多数落在同一个桶中的情况。为了得到输出结果，先对每个桶中的数进行排序，然后遍历每个桶，按照次序把各个桶中的元素列出来。
+
+
